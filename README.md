@@ -1,4 +1,4 @@
-# simblock
+# Simblock
 Simple Blockchain Implementation
 
 ## References
