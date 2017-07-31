@@ -1,5 +1,5 @@
 from simblock.tools import tester
-# import pdb
 
 t = tester.TestApp()
-# pdb.set_trace()
+store = t.head_state.trie.db.store
+tx = t.make_transaction()
