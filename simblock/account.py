@@ -1,5 +1,12 @@
 class Account():
-    def __init__(self, address="", balance=0, env=None):
+    empty_data = {
+        "balance": 0,
+        "nonce": 0,
+        "code": "",
+        "storage": {}
+    }
+
+    def __init__(self, address="", env=None):
         if not env:
             raise ValueError("Argument 'env' is not provided.")
 
@@ -10,7 +17,7 @@ class Account():
         try:
             self.data
         except KeyError:
-            self.db.put(self.address, {})
+            self.db.put(self.address, dict(self.empty_data))
 
     @property
     def data(self):

@@ -9,6 +9,7 @@ class Chain(object):
 
         if state:
             self.state = state
+            self.env = state.env
 
         # Assert if state DB equals to env DB
         assert self.env.db == self.state.db
