@@ -1,3 +1,6 @@
+import pickle
+from .utils import sha3_256
+
 class Block():
     def __init__(self, header=None, transactions=None):
         if not header:
@@ -23,3 +26,7 @@ class Block():
         self.header.nonce = next_header["nonce"]
 
         return self
+
+    def make_roots(self, state):
+        self.header.state_root = state.root_hash
+        self.header.tx_root = sha3_256(pickle.dumps(self.transactions))
