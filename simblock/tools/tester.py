@@ -61,3 +61,10 @@ class TestApp():
         self.block.transactions.append(tx)
 
         return tx
+
+    def make_candidate_block(self):
+        # 1. Get basic block info
+        # 2. Collect transactions
+        # 3. Calculate roots
+        self.block.make_roots(self.local_state)
+        return self.block
