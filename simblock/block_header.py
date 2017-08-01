@@ -35,6 +35,10 @@ class BlockHeader():
         self.timestamp = data["timestamp"]
         self.nonce = data["nonce"]
 
+        # roots
+        self.state_root = None
+        self.tx_root = None
+
     @property
     def hash(self):
         return sha3_256(pickle.dumps(self))

@@ -42,6 +42,10 @@ class State():
     def db(self):
         return self.env.db
 
+    @property
+    def root_hash(self):
+        return self.trie.root_hash
+
     def apply_transaction(self, tx):
         from_addr = tx.sender
         to_addr = tx.tx_data["to"]
