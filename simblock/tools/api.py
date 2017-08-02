@@ -66,5 +66,6 @@ class API():
         # 1. Get basic block info
         # 2. Collect transactions
         # 3. Calculate roots
+        # 4. Mark the block as a candidate
         self.block.make_roots(self.local_state)
         return self.block
