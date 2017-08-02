@@ -2,15 +2,17 @@ import pickle
 from .utils import sha3_256
 
 empty_data = {
+    "number": 0,
     "prevhash": "",
-    "difficulty": 0,
+    "difficulty": 2048,
     "timestamp": 0,
     "nonce": ""
 }
 
 _genesis_data = {
+    "number": 0,
     "prevhash": b"\x00" * 32,
-    "difficulty": 131072,
+    "difficulty": 2048,
     "timestamp": 0,
     "nonce": ""
 }
@@ -30,6 +32,7 @@ class BlockHeader():
         if data is None:
             data = empty_data
 
+        self.number = data["number"]
         self.prevhash = data["prevhash"]
         self.difficulty = data["difficulty"]
         self.timestamp = data["timestamp"]
