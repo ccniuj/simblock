@@ -6,7 +6,7 @@ from simblock.block import Block
 from simblock.block_header import BlockHeader
 from simblock.transaction import Transaction
 
-class TestApp():
+class API():
     def __init__(self):
         env = Env()
         self.privkeys = self.make_privkeys()

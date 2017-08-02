@@ -1,7 +1,7 @@
-from simblock.tools import tester
+from simblock.tools.api import API
 
-t = tester.TestApp()
-t.make_transaction()
-t.make_transaction()
-t.make_transaction()
-block = t.make_candidate_block()
+api = API()
+api.make_transaction()
+api.make_transaction()
+api.make_transaction()
+block = api.make_candidate_block()
