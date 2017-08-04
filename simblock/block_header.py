@@ -1,10 +1,9 @@
-import pickle
-from .utils import sha3_256
+from .utils import sha3_256, simple_encode
 
 empty_data = {
     "number": 0,
     "prevhash": "",
-    "difficulty": 2048,
+    "difficulty": 13000,
     "timestamp": 0,
     "nonce": ""
 }
@@ -12,7 +11,7 @@ empty_data = {
 _genesis_data = {
     "number": 0,
     "prevhash": b"\x00" * 32,
-    "difficulty": 2048,
+    "difficulty": 13000,
     "timestamp": 0,
     "nonce": ""
 }
@@ -44,6 +43,15 @@ class BlockHeader():
 
     @property
     def hash(self):
-        return sha3_256(pickle.dumps(self))
+        return sha3_256(simple_encode(dict(self)))
+
+    def __iter__(self):
+        return iter([
+            ("number", self.number),
+            ("prevhash", self.prevhash),
+            ("difficulty", self.difficulty),
+            ("timestamp", self.timestamp),
+            ("nonce", self.nonce)
+        ])
 
 GENESIS_BLOCK_HEADER = BlockHeader(data=_genesis_data)

@@ -69,3 +69,13 @@ class API():
         # 4. Mark the block as a candidate
         self.block.make_roots(self.local_state)
         return self.block
+
+    def mine(self):
+        self.make_candidate_block()
+        self.block.mine()
+        assert self.chain.add_block(self.block)
+        assert self.local_state.trie.root_hash == self.chain.state.trie.root_hash
+
+        # Update local state and block
+        self.local_state = self.chain.state.clone()
+        self.block = Block(BlockHeader()).from_prevstate(state=self.local_state)

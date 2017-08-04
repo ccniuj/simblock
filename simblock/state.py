@@ -3,7 +3,7 @@ from .trie import Trie
 from .account import Account
 from .block_header import GENESIS_BLOCK_HEADER
 # from .block import Block
-from copy import deepcopy
+from .utils import copy
 
 class State():
     def __init__(self, env=Env()):
@@ -36,15 +36,29 @@ class State():
         return self
 
     def clone(self):
-        return deepcopy(self)
+        return copy(self)
 
     @property
     def db(self):
-        return self.env.db
+        return self.trie.db
 
     @property
     def root_hash(self):
         return self.trie.root_hash
+
+    def apply_block(self, block):
+        # 1. Validate block
+        # 2. Apply transactions
+        # 3. Reward
+        # 4. Verify state root and tansaction root
+        # 5. Post-finalize
+        assert block.validate()
+
+        for tx in block.transactions:
+            self.apply_transaction(tx)
+
+        assert block.verify()
+        self.add_block_header(block.header)
 
     def apply_transaction(self, tx):
         from_addr = tx.sender
@@ -77,3 +91,6 @@ class State():
     def increment_nonce(self, addr):
         acct = self.get_account(addr)
         acct.data["nonce"] += 1
+
+    def add_block_header(self, header):
+        self.prev_headers = [header] + self.prev_headers

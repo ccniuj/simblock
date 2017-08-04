@@ -1,5 +1,4 @@
-import pickle
-from .utils import privkey_to_addr, sha3_256, ec_sign
+from .utils import privkey_to_addr, sha3_256, ec_sign, simple_encode
 
 class Transaction():
     fields = [
@@ -29,7 +28,7 @@ class Transaction():
         if self.signed == True:
             return None
         else:
-            raw_hash = sha3_256(pickle.dumps(self))
+            raw_hash = sha3_256(simple_encode(dict(self)))
             self.v, self.r, self.s = ec_sign(raw_hash, privkey)
             self.signed = True
 
@@ -37,3 +36,13 @@ class Transaction():
         self.sender = privkey_to_addr(privkey)
 
         return self
+
+    def __iter__(self):
+        return iter([
+            ("tx_data", self.tx_data),
+            ("sender", self.sender),
+            ("v", self.v),
+            ("r", self.r),
+            ("s", self.s),
+            ("signed", self.signed)
+        ])
