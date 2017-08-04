@@ -1,11 +1,10 @@
 from .env import Env
-from .utils import sha3_256
-import pickle
+from .utils import sha3_256, simple_encode, sort_dict
 
 # Not a real Trie yet!
 class Trie():
     def __init__(self, env=Env()):
-        self.db = env.db
+        self.db = env.state_db
 
     def get(self, key):
         return self.db.get(key)
@@ -15,4 +14,4 @@ class Trie():
 
     @property
     def root_hash(self):
-        return sha3_256(pickle.dumps(self.db))
+        return sha3_256(simple_encode(sort_dict(self.db.store)))

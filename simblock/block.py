@@ -1,5 +1,4 @@
-import pickle
-from .utils import sha3_256
+from .utils import sha3_256, simple_encode
 
 class Block():
     def __init__(self, header=None, transactions=None):
@@ -17,14 +16,16 @@ class Block():
 
         prev_header = state.prev_headers[0]
         next_header = {
-            "prevhash": prev_header.hash,
+            "number": prev_header.number + 1,
             "timestamp": timestamp or prev_header.timestamp + 1,
+            "prevhash": prev_header.hash,
             "difficulty": prev_header.difficulty,
             "nonce": ""
         }
 
-        self.header.prevhash = next_header["prevhash"]
+        self.header.number = next_header["number"]
         self.header.timestamp = next_header["timestamp"]
+        self.header.prevhash = next_header["prevhash"]
         self.header.difficulty = next_header["difficulty"]
         self.header.nonce = next_header["nonce"]
 
@@ -32,7 +33,7 @@ class Block():
 
     def make_roots(self, state):
         self.header.state_root = state.root_hash
-        self.header.tx_root = sha3_256(pickle.dumps(self.transactions))
+        self.header.tx_root = sha3_256(simple_encode([dict(tx) for tx in self.transactions]))
 
         # Mark the block as a candidate
         self._is_candidate = True
@@ -59,6 +60,19 @@ class Block():
             # check if this is a valid result, below the target
             num = int.from_bytes(hash_result, byteorder="big")
             if num < target:
+                self.header.nonce = nonce
                 return nonce
 
         return None
+
+    def validate(self):
+        return True
+
+    def verify(self):
+        return True
+
+    def __iter__(self):
+        return iter([
+            ("header", dict(self.header)),
+            ("transactions", [dict(tx) for tx in self.transactions])
+        ])

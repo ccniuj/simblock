@@ -1,3 +1,5 @@
+from .utils import sort_dict
+
 class Account():
     empty_data = {
         "balance": 0,
@@ -11,13 +13,13 @@ class Account():
             raise ValueError("Argument 'env' is not provided.")
 
         self.address = address
-        self.db = env.db
+        self.db = env.state_db
 
         # Check if the account exists
         try:
             self.data
         except KeyError:
-            self.db.put(self.address, dict(self.empty_data))
+            self.db.put(self.address, sort_dict((dict(self.empty_data))))
 
     @property
     def data(self):
