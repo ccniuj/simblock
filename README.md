@@ -1,6 +1,9 @@
 # Simblock
 Simple Blockchain Implementation
 
+## Talk
+- [Let's Make a Blockchain](https://github.com/juinc/talks/blob/master/coscup/slides.md)
+
 ## References
 - [pyethereum](https://github.com/ethereum/pyethereum)
 - [Ethereum White Paper](https://github.com/ethereum/wiki/wiki/White-Paper)
