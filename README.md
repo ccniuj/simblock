@@ -1,6 +1,11 @@
 # Simblock
 Simple Blockchain Implementation
 
+## How to Start
+```
+>>> python example.py
+```
+
 ## Talk
 - [Let's Make a Blockchain](https://github.com/juinc/talks/blob/master/coscup/slides.md)
 
