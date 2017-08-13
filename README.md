@@ -6,6 +6,7 @@ Simple Blockchain Implementation
 
 ## How to Start
 ```
+>>> pip install -r requirements.txt
 >>> python example.py
 ```
 
