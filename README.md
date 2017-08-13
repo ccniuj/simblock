@@ -10,6 +10,12 @@ Simple Blockchain Implementation
 >>> python example.py
 ```
 
+## How to Start with Docker
+```
+docker build -t simblock .
+docker run -d simblock
+```
+
 ## Talk
 - [Let's Make a Blockchain](https://github.com/juinc/talks/blob/master/coscup/slides.md)
 
