@@ -1,2 +1,2 @@
-pycrypto
+pycryptodome
 py_ecc
