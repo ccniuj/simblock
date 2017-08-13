@@ -1,6 +1,7 @@
 # Simblock
 
 [![Join the chat at https://gitter.im/simblock/Lobby](https://badges.gitter.im/simblock/Lobby.svg)](https://gitter.im/simblock/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Simple Blockchain Implementation
 
 ## How to Start
